@@ -373,6 +373,7 @@
 
 						case "proxy":
 							foreach($_POST[$key] as $r_k => $r_v){
+								//'https://neysummer-syashinn.glitch.me/
 								$_POST[$key][$r_k] = './php/image.php?image='.urlencode($r_v).'&referer='.urlencode($_GET['url']);
 							}
 							break;

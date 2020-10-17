@@ -191,7 +191,7 @@ function data_load_album(json){
 	var images = json.cover;
 	var parasm = get_url_params(j);
 	for(var d of json.urls){
-		images.push('./php/getPage.php?id='+json.id+'&url='+d+'&data='+parasm);
+		images.push(g_s_api+'getPage.php?id='+json.id+'&url='+d+'&data='+parasm);
 	}
 	var max = images.length;
 	if(max === 0){
@@ -213,7 +213,7 @@ function data_load_album(json){
 				<img class="img-thumbnail" src="` + d + `" alt='`+c+'/'+max+`'>
 			</div>
 		`;
-		g_s_urls = g_s_urls + (d.substr(0, 1) == '.' ? location.origin + location.pathname + d.substr(1, d.strlen - 1) : d) + "\r\n";
+		g_s_urls = g_s_urls + (d.substr(0, 1) == '.' ? g_s_api + d.substr(1, d.strlen - 1) : d) + "\r\n";
 	}
 	$('#_photo-list').append(h).
 	imagesLoaded()
@@ -329,7 +329,7 @@ function http_sortList(id, sid, page = 1, b_album = false, url = ''){
 
 	if(g_v_ajax.sort != undefined) g_v_ajax.sort.abort();
 	g_v_ajax.sort = $.ajax({
-		url: './php/api.php?id=' + id + '&sid=' + sid + '&url='+url+'&page='+ page,
+		url: g_s_api+'api.php?id=' + id + '&sid=' + sid + '&url='+url+'&page='+ page,
 		dataType: 'json'
 	})
 	.done(function(json) {
@@ -379,7 +379,7 @@ function enter_album(id, url, sub = false){
 	$('#_ui-album .-title').html(info.title);
 	setLoading(true);
 	if(!sub) sub = j.children !== undefined ;
-	var url = sub ? './php/api.php?id='+id+'&url=' + url+'&page=1' : './php/getPage.php?id='+id+'&url=' + url + '&img=0&data=' + get_url_params(j);
+	var url = sub ? g_s_api+'api.php?id='+id+'&url=' + url+'&page=1' : g_s_api+'getPage.php?id='+id+'&url=' + url + '&img=0&data=' + get_url_params(j);
 	console.log(url);
 
 	$.ajax({

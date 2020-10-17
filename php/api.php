@@ -92,10 +92,10 @@
 			}
 
 			$_GET['url'] = $url;
-			if($_GET['cache'] && file_exists('./cache/'.md5($_GET['url']).'.json')){
-				echo file_get_contents('./cache/'.md5($_GET['url']).'.json');
-				exit();
-			}
+			// if($_GET['cache'] && file_exists('./cache/'.md5($_GET['url']).'.json')){
+			// 	echo file_get_contents('./cache/'.md5($_GET['url']).'.json');
+			// 	exit();
+			// }
 
 			$_GET['lastUrl'] = $url;
 			if(isset($_GET['lastUrl']) && $_GET['lastUrl'] == $url){
@@ -243,8 +243,8 @@
 				}
 			}
 			$res = json_encode($_POST);
-			if(!is_dir('./cache/')) mkdir('./cache/');
-			file_put_contents('./cache/'.md5($_GET['url']).'.json', $res);
+			// if(!is_dir('./cache/')) mkdir('./cache/');
+			// file_put_contents('./cache/'.md5($_GET['url']).'.json', $res);
 			echo $res;
 			//echo '"id": "'.$_GET['data']['id'].'",'."\r\n";
 
