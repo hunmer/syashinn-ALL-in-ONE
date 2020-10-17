@@ -222,6 +222,9 @@ function data_load_album(json){
 		   		image.img.src = "images/404.png";
 		   	}
 	  });	
+	if(g_v_gallery !== undefined){
+		g_v_gallery.destroy();
+	}
 	g_v_gallery = new Viewer($('#_ui-album')[0]);
 	g_v_gallery.show();
 }
@@ -299,6 +302,8 @@ var g_v_showing_sort; // 正在浏览的分类
 
 // 分类 - 显示列表
 function enter_sortList(id, sid, title){
+	// 未加载过,需要先显示出图片
+	if(g_a_cache_sort[id+'-'+sid] === undefined) return; 
 	setNavDisplay(false);
 
 	var dom = $('#_ui-sort');

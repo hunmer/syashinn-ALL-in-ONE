@@ -325,6 +325,8 @@
     stop: null
   };
 
+  var pic_list_show = true;
+
    var TEMPLATE = '<div class="viewer-container" touch-action="none">' + '<div class="viewer-canvas"></div>' + '<div class="viewer-footer">' + '<div class="viewer-title"></div>' + '<div class="viewer-toolbar"></div>' + '<div class="viewer-navbar">' + '<ul class="viewer-list"></ul>' + '</div>' + '</div>' + '<div class="viewer-tooltip"></div>' + '<div role="button" class="viewer-button" data-viewer-action="mix"></div><div role="button" class="viewer-button viewer-list-open" data-viewer-action="switch-pic-list"></div>' + '<div class="viewer-player"></div>' + '</div>';
   var IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
   var WINDOW = IS_BROWSER ? window : {};
@@ -1312,15 +1314,11 @@
       if (IS_TOUCH_DEVICE && event.isTrusted && target === this.canvas) {
         clearTimeout(this.clickCanvasTimeout);
       }
-
       switch (action) {
         case 'switch-pic-list':
             var d = document.querySelector('.viewer-navbar');
-            if(d.style.display == 'none'){
-              d.style.display = 'unset';
-            }else{
-              d.style.display = 'none';
-            }   
+            d.style.display = this.pic_list_show ? 'unset' : 'none';
+            this.pic_list_show = !this.pic_list_show;
             break;        
         case 'mix':
           if (this.played) {
@@ -2136,6 +2134,13 @@
         ratio = 1 / (1 - ratio);
       } else {
         ratio = 1 + ratio;
+      }
+      var d = document.querySelector('.viewer-navbar');
+      if(ratio > 1){
+        d.style.display = 'none';        
+      }else
+      if(pic_list_show && d.style.display == 'none'){
+        d.style.display = 'unset';
       }
 
       this.zoomTo(imageData.width * ratio / imageData.naturalWidth, hasTooltip, _originalEvent);

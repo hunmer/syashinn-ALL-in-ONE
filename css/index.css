@@ -122,9 +122,11 @@ body {
    height: 100px !important;
   }
   .viewer-list-open {
-      top: unset;
-    bottom: -35px;
-  }
+ top: unset;
+    bottom: -20px;
+    right: -32px;
+    background-color: rgb(156 156 156 / 38%) !important;
+}
   .viewer-backdrop {
     background-color: rgba(0, 0, 0, 1);
 }
