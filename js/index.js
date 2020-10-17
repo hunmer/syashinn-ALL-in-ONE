@@ -84,8 +84,8 @@ function init(){
 
 // ----------------------
 // 网络请求
-function data_preload(tip = false){
-	if(tip) setLoading(true);
+function data_preload(){
+	setLoading(true);
 	$.ajax({
 		url: './php/web.json',
 		dataType: 'json'
@@ -96,7 +96,7 @@ function data_preload(tip = false){
 	.fail(function() {
 	})
 	.always(function() {
-		if(tip) setLoading(false);
+		setLoading(false);
 	});
 }
 
