@@ -382,6 +382,7 @@
 			}
 		}
 		$res = json_encode($_POST);
+		if(!is_dir('./cache/')) mkdir('./cache/');
 		file_put_contents('./cache/'.md5($_GET['url']).'.json', $res);
 		echo $res;
 		exit();

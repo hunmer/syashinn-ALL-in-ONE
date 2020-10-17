@@ -1,7 +1,7 @@
 
 var a_get = getGETArray();
 //var g_s_api = 'php/';
-var g_s_api = 'https://neysummer-syashinn.glitch.me/';
+ var g_s_api = 'https://neysummer-syashinn.glitch.me/';
 var g_localKey = 'syashinn_';
 // 本地储存前缀
 var g_config = local_readJson('config', {

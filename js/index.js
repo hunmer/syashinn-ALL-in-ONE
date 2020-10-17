@@ -13,7 +13,7 @@ $(function() {
 	$(window).scroll(function() {
 	    var scrollTop = $(this).scrollTop();
 	    var i = $(document).height() - (scrollTop + $(this).height());
-	    if (i <= 50) {
+	    if (i <= 80) {
 	        //滚动条到达底部
 			var now = new Date().getTime() / 1000;
             if (g_b_loading || now - g_i_loading_last <= 3) return;
@@ -142,7 +142,7 @@ function data_load_sort(json, b_album){
 	if(json.res === undefined) return;
 
 	for(var d of json.res){
-		if(c % 3 === 0){
+		if(c % 2 === 0){
 			h = h + '<div class="w-100"></div>';
 		}
 		g_a_cache_albums[d.url] = {
@@ -204,7 +204,7 @@ function data_load_album(json){
 
 	}, 1000);	
 	for(var d of images){
-		if(c % 3 === 0){
+		if(c % 2 === 0){
 			h = h + '<div class="w-100"></div>';
 		}		
 		c++;
@@ -274,8 +274,8 @@ function view_site(id){
 							</div>
 						</div>
 					<div class="-image-list row pt-2 pb-2">`;
-				for(let y=0;y<2;y++){
-					for(let x=0;x<3;x++){
+				for(let y=0;y<3;y++){
+					for(let x=0;x<2;x++){
 						h = h + `
 							<div class="col">
 								<img class="img-thumbnail" src="images/loading.gif">
@@ -365,7 +365,6 @@ function enter_album(id, url, sub = false){
 	g_v_showing.url = url;
 	g_v_showing.json = j;
 
-	setNavDisplay(false);
 	var dom = $('#_photo-list');
 	if(!sub && dom.attr('data-url') == url){
 		// 上次打开过
@@ -387,6 +386,7 @@ function enter_album(id, url, sub = false){
 		dataType: 'json'
 	})
 	.done(function(json) {
+		setNavDisplay(false);
 		if(sub){
 			console.log("sub");
 			g_v_showing_sort = {id: id, url: url, page: 1}; // 定义url属性
